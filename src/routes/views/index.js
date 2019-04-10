@@ -14,4 +14,8 @@ router.get('/users', function (req, res) {
   })
 })
 
+router.get('/api', function (req, res) {
+  res.render('api')
+})
+
 module.exports = router
