@@ -1,18 +1,15 @@
+const setupPa = require('./pulseaudio')
+
+// fork process management
 const cp = require('child_process')
-// spawn('path',  ['list', 'of', 'args']);
 var spawnAsync = cp.spawn;
 var spawnSync = cp.spawnSync;
+// spawn*('path',  ['list', 'of', 'args']);
 
 var mkProc;
 const mkArgs = []
 
 // proc.stdout.setEncoding('utf8');
-
-// proc.stdout.on('data', function (data) {
-//   var str = data.toString()
-//   var lines = str.split(/(\r?\n)/g);
-//   console.log(lines.join(""));
-//});
 
 const start_stream = (device) => {
   if (mkProc != null) {
@@ -23,6 +20,7 @@ const start_stream = (device) => {
   mkProc = spawnAsync('mkchromecast', mkArgs)
   mkProc.on('data', (data) => {
     if (data.indexOf('Creating pulseaudio sink') >= 0) {
+      // configure output device as input to PA
       setupPa(data)
     }
   })
@@ -35,7 +33,7 @@ const stop_stream = () => {
   }
 }
 
-export default startup = () => {
+export default start_up = () => {
   const proc = spawnSync('which', ['mkchromecast'])
 
   if (proc.status !== 0) {
@@ -47,5 +45,5 @@ export default startup = () => {
 module.exports = {
   start_stream,
   stop_stream,
-  startup
+  start_up
 }

@@ -9,15 +9,10 @@ const path = require('path')
 const app = express()
 const port = process.env.PORT || 3000
 
-// Configure Handlebars engine for Express
-app.engine("hbs", hbs.express4({
-  // partialsDir: path.join(__dirname, "src/views/partials"),
-  layoutsDir: path.join(__dirname, "src/views/layouts/"),
-  defaultLayout: path.join(__dirname, "src/views/layouts/default.hbs"),
-  extname: ".hbs",
-}));
-app.set("view engine", "hbs")
-app.set("views", path.join(__dirname, "src", "views"));
+app.use('/', express.static(path.join(__dirname, 'streamer-client', '/dist')))
+app.use('/*', function(req, res, next) {
+  res.sendFile('index.html', { root: __dirname });
+});
 
 // Apply middleware for logging, json and url decoding, and cookie parser
 app.use(logger('dev'))

@@ -1,4 +1,4 @@
-const formalize = require('../../lib/formalize')
+const formalize = require('../../lib/util/formalize')
 const express = require('express')
 const router = express.Router()
 
