@@ -9,9 +9,15 @@ const path = require('path')
 const app = express()
 const port = process.env.PORT || 3000
 
-app.use('/', express.static(path.join(__dirname, 'streamer-client', '/dist')))
+// Create and attach routers
+const apiRouter = require('./server/src/routes/api')
+app.use('/api', apiRouter)
+
+// Serve Angular app
+const ngRoot = process.env.APP_ROOT || path.join(__dirname, 'client', 'dist')
+app.use('/', express.static(ngRoot))
 app.use('/*', function(req, res, next) {
-  res.sendFile('index.html', { root: __dirname });
+  res.sendFile('index.html', { root: ngRoot });
 });
 
 // Apply middleware for logging, json and url decoding, and cookie parser
@@ -20,13 +26,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-
-// Create and attach routers
-const viewRouter = require('./src/routes/views')
-const apiRouter = require('./src/routes/api')
-
-app.use('/api', apiRouter)
-app.use('/', viewRouter)
 
 // 404 with default http error
 app.use((req, res, next) => {

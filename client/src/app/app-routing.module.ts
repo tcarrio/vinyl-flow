@@ -6,12 +6,12 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
-  { path: '/home', component: HomeComponent },
-  { path: '/login', component: LoginComponent },
-  { path: '/pulse', component: PulseAudioComponent, canActivate: [ AuthGuard ] },
-  { path: '/sub-route', pathMatch: 'full' },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '**', redirectTo: '/home' },
+  { path: 'home', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'pulse', component: PulseAudioComponent, canActivate: [ AuthGuard ] },
+  { path: 'sub-route', pathMatch: 'full', redirectTo: 'www.google.com' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home' },
 ];
 
 @NgModule({
