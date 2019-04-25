@@ -1,6 +1,6 @@
-# nodejs-express-ng-practice
+# vinyl-flow
 
-I have had an idea for an application I have wanted to build out for some time.
+I have had an idea for an application which I have wanted to build out for some time.
 
 **End goal: Allow a dedicated hardware device to provide streaming audio to Chromecast-enabled devices.**
 
@@ -26,5 +26,6 @@ This is a hobby project in what seems to be seldom spare time- so it is definite
 - [Auth0](https://auth0.com/universal-login)
 
 Really, I just want to turn this turntable into something even more useful.
+
 Being able to tell my Google Home devices to start up the turntable on every speaker and have it play across all of my devices is the point I consider this a success.
 
